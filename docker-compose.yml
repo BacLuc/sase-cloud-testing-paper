@@ -1,0 +1,11 @@
+services:
+  latex:
+    build:
+      context: image
+      target: tex-container
+      cache_from:
+        - ghcr.io/${REPO_OWNER:-bacluc}/sase-cloud-testing-paper:${VERSION:-local}
+    image: ghcr.io/${REPO_OWNER:-bacluc}/sase-cloud-testing-paper:${VERSION:-local}
+    volumes:
+      - ./tex:/workspace
+      - ./out:/out
