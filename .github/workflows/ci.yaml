@@ -90,11 +90,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Cache Docker images.
-        uses: ScribeMD/docker-cache@0.2.10
-        with:
-          key: docker-${{ runner.os }}-${{ hashFiles('docker-compose.yml') }}
-
       - name: pull images if possible
         env:
           tags: ${{ steps.image-tags.outputs.image-tags}}
@@ -158,6 +153,10 @@ jobs:
           docker compose build
           docker compose push
 
+      - name: Delete images with tag <none>
+        run:  docker images -a | grep "<none>" | awk '{ print $3 }' | xargs docker rmi -f
+        
+
   check-format:
     runs-on: ubuntu-latest
     needs:
@@ -175,11 +174,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Cache Docker images.
-        uses: ScribeMD/docker-cache@0.2.10
-        with:
-          key: docker-${{ runner.os }}-${{ hashFiles('docker-compose.yml') }}
 
       - name: pull image
         env:
@@ -210,11 +204,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Cache Docker images.
-        uses: ScribeMD/docker-cache@0.2.10
-        with:
-          key: docker-${{ runner.os }}-${{ hashFiles('docker-compose.yml') }}
 
       - name: pull image
         env:
