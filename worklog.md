@@ -29,7 +29,20 @@ Search on IEEE Explore for "cloud testing" https://ieeexplore.ieee.org/search/se
 - Integrating and enhancing the quality of services in cloud computing with software testing https://ieeexplore.ieee.org/document/7566494
 - A cloud-based dynamic random software testing strategy https://ieeexplore.ieee.org/document/8289943
 - Software Testing Approach for Cloud Applications (STACA) – Methodology, Techniques & Tools https://ieeexplore.ieee.org/document/8776915
-- 
+
+Search on ACM Digital Library for the proposed keyword "TTC: Testing the Cloud"
+- Data science in the cloud: analysis of data from testing in production: https://dl.acm.org/doi/10.1145/2489295.2493955
+- Testing a cloud application: IBM SmartCloud inotes: methodologies and tools https://dl.acm.org/doi/10.1145/2489295.2489299
+- Enabling large-scale testing of IaaS cloud platforms on the grid'5000 testbed https://dl.acm.org/doi/10.1145/2489295.2489298
+- On the necessity of model checking NoSQL database schemas when building SaaS applications https://dl.acm.org/doi/10.1145/2489295.2489297
+
+Search on Google Scholar for "Testing the cloud"
+- Research Issues for Software Testing in the Cloud https://ieeexplore.ieee.org/abstract/document/5708500
+- Conventional Software Testing Vs. Cloud Testing https://d1wqtxts1xzle7.cloudfront.net/36791341/Conventional-Software-Testing-Vs-Cloud-Testing-libre.pdf?1425027477=&response-content-disposition=inline%3B+filename%3DConventional_Software_Testing_Vs_Cloud_T.pdf&Expires=1679389332&Signature=dk7QKIYRFMXh7VTuwdy2r3Hvbe6wShiRMH9RSKldRcdLlIUZDhgRnV6GPcSO8eNRGdhkVCPEwiqi0tNGgOQ~N8BeQQvPQzKiVcTSsMrRJOesuHEGLW5klbeJzzpftu~9yy3QqbxBjv3zblweRi3MQI1HMTw-DyBBcsQHToHh2G-tiuvN1pI7V7J2XLKDFdgOBLfqDM7xJF1nuguEV4d9VNr530E-g3mr7~fqnAGiRrDwhKkEQCg374Im-hBuul8Tplsuj638MsYa6XHUDJ3eT7rHdkWWwtR8goYkQlcbYGWSoXy23KnaYbHZaWSRQKEk~k7mzOKq6MiwmESCcu4zlQ__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
+- Software Testing in Cloud Platform: A Survey https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=7451421247490e66a9b244bb0eb3a2aee59b0bc7
+- Cloud testing-issues, challenges, needs and practice https://www.researchgate.net/profile/Wei-Tek-Tsai/publication/220838758_Cloud_testing_tools/links/5f40c1f292851cd3021511bb/Cloud-testing-tools.pdf
+- A survey of software testing in the cloud https://ieeexplore.ieee.org/abstract/document/6258440/
+- Cloud services testing: An understanding https://www.sciencedirect.com/science/article/pii/S1877050911003917
 
 From a conference talk: https://ieeexplore.ieee.org/document/7436642
  
