@@ -45,4 +45,47 @@ Search on Google Scholar for "Testing the cloud"
 - Cloud services testing: An understanding https://www.sciencedirect.com/science/article/pii/S1877050911003917
 
 From a conference talk: https://ieeexplore.ieee.org/document/7436642
- 
+
+Snowballing:
+- A Cloud-Based Dynamic Random Software Testing Strategy
+  - Analysis of Cloud Test Beds Using Open-Source Solutions. In Future Internet of Things and Cloud https://ieeexplore.ieee.org/abstract/document/7300818/
+  - Cloud testing-issues, challenges, needs and practice. Software Engineering
+
+- Analysis for Cloud Testing of Web Application
+  - The NIST Definition of Cloud Computing, https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf
+  - Scott Tilley and Tauhida Parveen, “Software Testing in the Cloud, ” https://link.springer.com/book/10.1007/978-3-642-32122-1
+
+- A Simple Path Towards Testing Cloud Applications
+  - Gremlin: Systematic Resilience Testing of Microservices https://ieeexplore.ieee.org/abstract/document/7536505
+- A Survey of Software Testing in the Cloud
+  - Environment modeling for automated testing of cloud applications http://taoxie.cs.illinois.edu/publications/NCSUCSCTR2011-12.pdf
+  - On the standardization of a testing framework for application deployment on grid and cloud infrastructures https://ieeexplore.ieee.org/abstract/document/5617071/
+- A Systematic Review on Cloud Testing
+  - A DSL-based approach for elasticity testing of cloud systems https://dl.acm.org/doi/abs/10.1145/3023147.3023149
+  - Enhanced CBMG-based method for automatically testing web applications in the cloud https://ieeexplore.ieee.org/abstract/document/6733209
+  - Software Architectural Drivers for Cloud Testing https://www.researchgate.net/publication/267329021_Software_Architectural_Drivers_for_Cloud_Testing
+  - SLA evaluation with on-the-fly measurements of distributed service implementation over clouds. https://dl.acm.org/doi/abs/10.1145/2593793.2593794
+  - SLA evaluation in cloud-based data-centric distributed services https://ieeexplore.ieee.org/abstract/document/6911762/
+  - ATP: A browser-based distributed testing service platform. https://ieeexplore.ieee.org/abstract/document/7858468/
+  - A SOA testing platform on the cloud: The MIDAS experience. https://ieeexplore.ieee.org/abstract/document/7057166/
+  - PCTF: An integrated, extensible cloud test framework for testing cloud platforms and applications. https://ieeexplore.ieee.org/abstract/document/6605918/
+  - Efficient testing based on logical architecture. https://dl.acm.org/doi/abs/10.1145/2811681.2811691
+  - An architecture for cloud service testing and real time management. https://ieeexplore.ieee.org/abstract/document/7273431/
+  - Unit and integration testing of modular cloud services https://ieeexplore.ieee.org/abstract/document/7921031
+  - Evaluation of Cloud based Performance Testing for Online Shopping Websites https://sciresol.s3.us-east-2.amazonaws.com/IJST/Articles/2015/Issue-35/Article63.pdf
+- Chaos Engineering
+  - Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-yuan.pdf
+- Cloud API Testing
+  - Cloud testing-issues, challenges, needs and practice,
+- Cloud Services Testing: An Understanding
+- Comparison of Traditional Testing and Cloud Testing
+  - A review on software testing approachesfor cloud application https://www.sciencedirect.com/science/article/pii/S2213020916301999
+  - Survey of Software Testing in the Cloud
+  - Framework for Analyzing and Testing Cloud based Applications https://www.researchgate.net/publication/297700938_Framework_for_Testing_Cloud_Base_Applications
+  - Cloud Testing- Issues, Challenges, Needs and Practice
+- Framework for Testing Cloud Base Applications
+  - Enabling Automated Integration Testing of Cloud Application Services in Virtualized Environments, https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=3831e8d60cc667a61703adc616d196c0747bd869
+  - Cloud Testing- Types, Service Platforms and Advantages https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=88042f68005be21b07c93d55b5e66d69eb238807
+- Gremlin: Systematic Resilience Testing of Microservices
+- Unit and Integration Testing of Modular Cloud Services
+  - Automatic Deployment of Cloud Services for Healthcare Application Development in FI-STAR FP7
