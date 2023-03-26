@@ -123,3 +123,9 @@ Literature analysis of bugs, analysis of source code, test results, issues on gi
 ## Result:
 
 ## Conclusion:
+
+# Papers to read
+- A Systematic Review on Cloud Testing
+- Cloud testing-issues, challenges, needs and practice. Software Engineering
+- Chaos Engineering
+- Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems
