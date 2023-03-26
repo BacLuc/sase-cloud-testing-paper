@@ -89,3 +89,37 @@ Snowballing:
 - Gremlin: Systematic Resilience Testing of Microservices
 - Unit and Integration Testing of Modular Cloud Services
   - Automatic Deployment of Cloud Services for Healthcare Application Development in FI-STAR FP7
+
+## Plan for the paper
+
+## Intro:
+Cloud testing
+Research on big applications
+Now research on small application
++ main result
+
+## Related work:
+Testing in the cloud
+
+Testing of the cloud
+
+
+## Background:
+Was ist cloud
+
+Was ist docker + kubernetes + helm
+
+Was ist github actions
+
+Was ist ecamp
+Kurz domäne, techstack, architektur, deployment
+
+## Methode:
+Literature analysis of bugs, analysis of source code, test results, issues on github
+
+## Experiment:
+
+
+## Result:
+
+## Conclusion:
