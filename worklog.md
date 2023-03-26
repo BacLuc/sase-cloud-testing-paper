@@ -129,3 +129,94 @@ Literature analysis of bugs, analysis of source code, test results, issues on gi
 - Cloud testing-issues, challenges, needs and practice. Software Engineering
 - Chaos Engineering
 - Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems
+- Cloud Testing - Proposed Framework with its
+  Scope, Importance, Methodologies, Challenges
+
+# Citations
+
+- The NIST Definition of Cloud Computing
+- A Systematic Review on Cloud Testing
+  - many techniques and tools address test generation.
+    In this case, parallelization is used for mitigating the data values explosion problem (Chorng-Shiuh Koong, Chih-Hsiong Shih, Chang-Chung Wu, and Pao-Ann Hsiung. 2013. The architecture of paral-
+    lelized cloud-based automatic testing system. In Proceedings of the 7th International Conference on Complex, Intelli-
+    gent, and Software Intensive Systems (CISIS’13). IEEE, 467–470.)
+  - Parallel concolic execution (Lin Cheng, Jialiang Chang, Zijiang Yang, and Chao Wang. 2016. GUICat: GUI testing as a service. In Proceedings of
+    the 31st IEEE/ACM International Conference on Automated Software Engineering. ACM, 858–863.)
+  - symbolic execution algorithms (Nassima Aleb and Samir Kechid. 2012. Path coverage testing in the cloud. In Proceedings of the International Confer-
+    ence on Communications and Information Technology (ICCIT’12). IEEE, 118–123.)
+  - Cloud9 is “an automated testing platform that
+    employs parallelization to scale symbolic execution by harnessing the resources of commodity
+    clusters” (Inderveer Chana and Priyanka Chawla. 2013. Testing perspectives for cloud-based applications. In Software Engi-
+    neering Frameworks for the Cloud Computing Paradigm. Springer, 145–164.)
+  - AUTOMATIC, which derives many different QoS config-
+    urations to be tested in the cloud (Kyoungho An, Takayuki Kuroda, Aniroddha Gokhale, Sumant Tambe, and Andrea Sorbini. 2014. Model-driven gen-
+    erative framework for automated OMG DDS performance testing in the cloud. ACM Sigplan Not. 49, 3 (2014), 179–
+    182.)
+  - MIDAS [58] is a model-based scalable testing platform leveraging a Domain
+    Specific Language (DSL) based on the Unified Modeling Language (UML) and the UML Testing
+    Profile (UTP). (Steffen Herbold, Alberto De Francesco, Jens Grabowski, Patrick Harms, Lom M. Hillah, Fabrice Kordon, Ariele-Paolo
+    Maesano, Libero Maesano, Claudia Di Napoli, Fabio De Rosa et al. 2015. The MIDAS cloud platform for testing SOA
+    applications. In Proceedings of the International Conference on Software Testing, Verification and Validation (ICST’15).
+    IEEE, 1–8.)
+- Cloud testing-issues, challenges, needs and practice. Software Engineering
+  - 
+- Chaos Engineering
+- Simple Testing Can Prevent Most Critical Failures: An Analysis of Production Failures in Distributed Data-Intensive Systems
+- Cloud Testing - Proposed Framework with its
+  Scope, Importance, Methodologies, Challenges
+  - Types of Tests:
+    - Performance Testing
+    - Load Testing
+    - Stress Testing
+    - Capacity Testing
+    - Security Testing
+    - Governance Risk Compliance Testing
+- Cloud Testing- Types, Service Platforms and
+  Advantages
+  - Types of Tests
+    - Performance and load
+    - Interoperability and compatibility
+    - Stress and Recovery
+    - System Integration and User Acceptance
+    - Security
+- Conventional Software Testing Vs. Cloud
+  Testing
+  - Types of tests
+    - Conventional:
+      - Functionality Testing
+      - Usability testing
+      - Interface testing
+      - Compability testing
+      - Performance testing
+      - Security testing
+    - Cloud
+      - Functional testing
+        - Availability
+        - Accessibility
+        - Data Security
+        - Privacy
+      - Performance
+      - Load
+      - Stress
+      - Capacity
+- PCTF: An Integrated, Extensible Cloud Test
+  Framework for Testing Cloud Platforms and
+  Applications
+  - Types of tests
+    - Elasticity and Scalability Testing
+    - Security Testing
+    - Performance Testing
+    - Live upgrade testing
+    - Multi tenancy testing
+    - SLA performance testing
+    - load testing
+    - compability testing
+    - interopaerability testing
+    - integration testing
+    - web portal testing
+- Software Testing Approach for Cloud
+  Applications (STACA) – Methodology,
+  Techniques & Tools
+  - types of tests
+    - Graphic in V Software Testing Techniques
+- 
