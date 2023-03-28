@@ -1,5 +1,9 @@
 #!/bin/sh
 set -e
+
+sudo chmod -R +w /workspace
+sudo chmod -R +w /out
+
 if [ "$1" = "default" ]; then
   pdflatex_path=$(which pdflatex)
   cmd="$pdflatex_path -output-format=pdf -halt-on-error"
