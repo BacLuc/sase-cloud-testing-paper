@@ -11,12 +11,12 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
 
 jobs:
-  build-image:
+  build-info:
     runs-on: ubuntu-latest
     outputs:
-      image-tags: ${{ steps.image-tags.outputs.tags }}
-      latest-commit: ${{ steps.latest-commit.outputs.latest-commit }}
-      repo-owner-lowercase: ${{ steps.repo-owner.outputs.result }}
+      repo-owner: ${{ steps.repo-owner.outputs.result }}
+      tags: ${{ steps.image-tags.outputs.image-tags }}
+      build-config: ${{ steps.build-info.outputs.result }}
     steps:
 
       #github forces lower case for the image name
@@ -28,15 +28,7 @@ jobs:
           script: |
             return context.repo.owner.toLowerCase()
 
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3
-        with:
-          fetch-depth: 100
-
-      - name: Get latest commit for image
-        id: latest-commit
-        run: |
-          latest_relevant_commit=$(git log --oneline image/ docker-compose.yml | head -n 1 | cut -d' ' -f1)
-          echo "latest-commit=$latest_relevant_commit" | tr -d "\n" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v3
 
       - name: Set nightly tag if commit was on main
         id: add-nightly-tag
@@ -63,7 +55,7 @@ jobs:
         run: |
           TAGS=$(cat <<-END
               [
-              "${{ steps.latest-commit.outputs.latest-commit }}",
+              "${{ github.sha }}",
               "${{ steps.add-nightly-tag.outputs.nightly-tag }}",
               "${{ steps.add-latest-tag.outputs.latest-tag }}",
               "${{ steps.get-tag.outputs.result }}"
@@ -71,16 +63,50 @@ jobs:
           END
           )
           TAGS=$(echo $TAGS | jq -c 'map(select(length > 0))')
-          echo "image-tags='$TAGS'" | tr -d "\n"  >> $GITHUB_OUTPUT
+          echo "image-tags=$TAGS" | tr -d "\n"  >> $GITHUB_OUTPUT
 
-      - name: Get tags
-        env:
-          tags: ${{ steps.image-tags.outputs.image-tags}}
+      - name: Get bulid info
+        id: build-info
         run: |
-          echo "${{ env.tags }}"
+          set -x
+          sudo snap install yq
+          docker compose --profile local-run config > /tmp/docker-compose.yml
+          BUILD_INFO=$(cat /tmp/docker-compose.yml | yq '.services.[] | select(.build != null) | [.build * {"image": .image}]' -o=json)
+          BUILD_INFO=$(echo $BUILD_INFO | jq -c -s add | sed "s|:local||g")
+          echo "result=$BUILD_INFO" | tr -d "\n"  >> $GITHUB_OUTPUT
+        env:
+          REPO_OWNER: ${{ steps.repo-owner.outputs.result }}
+          VERSION: local
+          LATEX_DOCKERFILE_PATH: image/Dockerfile
+
+  build-image:
+    runs-on: ubuntu-latest
+    needs:
+      - build-info
+    env:
+      tags: ${{ needs.build-info.outputs.tags }}
+      repo-owner: ${{ needs.build-info.outputs.repo-owner }}
+      build-config: ${{ toJSON(fromJSON(needs.build-info.outputs.build-config)[0]) }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: |
+          echo "build config:"
+          cat <<-HEREDOC
+          ${{ toJSON(env.build-config) }}
+          HEREDOC
+          
+          echo "build tags:"
+          cat <<-HEREDOC
+          ${{ env.tags }}
+          HEREDOC
+          
+          echo "build repo owner:"
+          cat <<-HEREDOC
+          ${{ env.repo-owner }}
+          HEREDOC
 
       - name: Set up Docker Buildx
-        id: buildx
         uses: docker/setup-buildx-action@v2
 
       - name: Login to GitHub Container Registry
@@ -90,77 +116,35 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: pull images if possible
+      - uses: actions/github-script@v6
+        id: expand-tags
         env:
-          tags: ${{ steps.image-tags.outputs.image-tags}}
-        run: |
-          tags=$(echo ${{ env.tags }} | jq ".+[ \"nightly\", \"latest\" ]")
-          for tag in $(echo $tags | jq -r '.[]'); do
-              echo "pulling $tag"
-              VERSION=$tag docker compose pull || true
-          done
+          IMAGE: ${{ fromJSON(env.build-config).image }}
+        with:
+          script: |
+            const { IMAGE } = process.env
+            return JSON.parse('${{ env.tags }}').map(tag => `${IMAGE}:${tag}`)
 
-      - name: check if tag exists
-        id: tag-exists
-        env:
-          VERSION: ${{ steps.latest-commit.outputs.latest-commit }}
-          REPO_OWNER: ${{ steps.repo-owner.outputs.result }}
-        run: |
-          set +e
-          docker compose pull
-          tag_exists=$(if [ $? -eq 0 ]; then echo "true"; else echo "false"; fi)
-          echo "tag-exists=$tag_exists" | tr -d "\n"  >> $GITHUB_OUTPUT
-
-      - name: Build and push nightly
-        if: ${{ steps.add-nightly-tag.outputs.nightly-tag }}
-        env:
-          VERSION: ${{ steps.add-nightly-tag.outputs.nightly-tag }}
-          REPO_OWNER: ${{ steps.repo-owner.outputs.result }}
-        run: |
-          docker compose build
-          docker compose push
-
-      - name: Build and push tag
-        if: ${{ steps.get-tag.outputs.result }}
-        env:
-          VERSION: ${{ steps.get-tag.outputs.result }}
-          REPO_OWNER: ${{ steps.repo-owner.outputs.result }}
-        run: |
-          docker compose build
-          docker compose push
-
-      - name: Build and push latest
-        if: ${{ steps.add-latest-tag.outputs.latest-tag }}
-        env:
-          VERSION: ${{ steps.add-latest-tag.outputs.latest-tag }}
-          REPO_OWNER: ${{ steps.repo-owner.outputs.result }}
-        run: |
-          docker compose build
-          docker compose push
-
-      - name: checkout latest commit
-        env:
-          latest-commit: ${{ steps.latest-commit.outputs.latest-commit }}
-        run: |
-          git checkout ${{ env.latest-commit }}
-
-      - name: Build and push latest commit for image
-        if: ${{ steps.tag-exists.outputs.tag-exists == 'false' }}
-        env:
-          VERSION: ${{ steps.latest-commit.outputs.latest-commit }}
-          REPO_OWNER: ${{ steps.repo-owner.outputs.result }}
-        run: |
-          docker compose build
-          docker compose push
-
-      - name: Delete images with tag <none>
-        run:  docker images -a | grep "<none>" | awk '{ print $3 }' | xargs docker rmi -f
+      - name: Build and push image
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          file: ${{ fromJSON(env.build-config).dockerfile }}
+          tags: ${{ join(fromJSON(steps.expand-tags.outputs.result)) }}
+          context: ${{ fromJSON(env.build-config).context }}
+          cache-from: type=gha,scope=${{ fromJSON(env.build-config).image }}
+          cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
         
 
   check-format:
     runs-on: ubuntu-latest
     needs:
-      build-image
+      - build-info
+      - build-image
+    env:
+      build-config: ${{ toJSON(fromJSON(needs.build-info.outputs.build-config)[0]) }}
+      VERSION: ${{ github.sha }}
+      REPO_OWNER: ${{ needs.build-info.outputs.repo-owner }}
     steps:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3
 
@@ -168,29 +152,31 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Build and load image
+        uses: docker/build-push-action@v4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          load: true
+          file: ${{ fromJSON(env.build-config).dockerfile }}
+          tags: ${{ fromJSON(env.build-config).image }}:${{ env.VERSION }}
+          context: ${{ fromJSON(env.build-config).context }}
+          cache-from: type=gha,scope=${{ fromJSON(env.build-config).image }}
+          cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
 
-      - name: pull image
-        env:
-          VERSION: ${{ needs.build-image.outputs.latest-commit }}
-          REPO_OWNER: ${{ needs.build-image.outputs.repo-owner-lowercase }}
-        run: docker compose pull
+      - name: allow 1000 to write files
+        run: chmod -R +w .
 
       - name: check-format
-        env:
-          VERSION: ${{ needs.build-image.outputs.latest-commit }}
-          REPO_OWNER: ${{ needs.build-image.outputs.repo-owner-lowercase }}
         run: docker compose run --rm latex check-format
 
   build-pdf:
     runs-on: ubuntu-latest
     needs:
-      build-image
+      - build-info
+      - build-image
+    env:
+      build-config: ${{ toJSON(fromJSON(needs.build-info.outputs.build-config)[0]) }}
+      VERSION: ${{ github.sha }}
+      REPO_OWNER: ${{ needs.build-info.outputs.repo-owner }}
     steps:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3
 
@@ -198,26 +184,20 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Build and load image
+        uses: docker/build-push-action@v4
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          load: true
+          file: ${{ fromJSON(env.build-config).dockerfile }}
+          tags: ${{ fromJSON(env.build-config).image }}:${{ env.VERSION }}
+          context: ${{ fromJSON(env.build-config).context }}
+          cache-from: type=gha,scope=${{ fromJSON(env.build-config).image }}
+          cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
 
-      - name: pull image
-        env:
-          VERSION: ${{ needs.build-image.outputs.latest-commit }}
-          REPO_OWNER: ${{ needs.build-image.outputs.repo-owner-lowercase }}
-        run: docker compose pull
-
-      - name: allow 1000 to write to out
-        run: chmod -R +w out
+      - name: allow 1000 to write files
+        run: chmod -R +w .
 
       - name: generate pdf
-        env:
-          VERSION: ${{ needs.build-image.outputs.latest-commit }}
-          REPO_OWNER: ${{ needs.build-image.outputs.repo-owner-lowercase }}
         run: docker compose run -u 1001 --rm latex
 
       - name: add archive to build output

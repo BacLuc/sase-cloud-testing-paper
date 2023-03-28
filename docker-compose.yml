@@ -2,9 +2,10 @@ services:
   latex:
     build:
       context: image
+      dockerfile: ${LATEX_DOCKERFILE_PATH:-Dockerfile}
       target: tex-container
       cache_from:
-        - ghcr.io/${REPO_OWNER:-bacluc}/sase-cloud-testing-paper:${VERSION:-local}
+        - ghcr.io/${REPO_OWNER:-bacluc}/sase-cloud-testing-paper
     image: ghcr.io/${REPO_OWNER:-bacluc}/sase-cloud-testing-paper:${VERSION:-local}
     volumes:
       - ./tex:/workspace

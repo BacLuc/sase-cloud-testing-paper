@@ -1,4 +1,4 @@
-FROM sharelatex/sharelatex-base:3.5.0  AS tex-container
+FROM sharelatex/sharelatex-base:3.5.0@sha256:08c277485c77a58f22900ecf893f2c60b0cf9a848c57735ca80881470d1112d6  AS tex-container
 
 ENV DEBIAN_FRONTEND=noninteractive
 
