@@ -5,11 +5,19 @@ sudo chmod -R +w /workspace
 sudo chmod -R +w /out
 
 if [ "$1" = "default" ]; then
+  bibtex_path=$(which bibtex)
+  cp -a /workspace/* /out
+  cd /out
+  latex_file_without_tex=$(echo ${LATEX_MAIN_FILE} | sed 's|.tex||')
   pdflatex_path=$(which pdflatex)
   cmd="$pdflatex_path -output-format=pdf -halt-on-error"
   cmd="$cmd -interaction=nonstopmode"
-  cmd="$cmd -output-directory=/out ${LATEX_MAIN_FILE}"
-  exec $cmd
+  cmd="$cmd ${LATEX_MAIN_FILE}"
+  $cmd
+  $bibtex_path ${latex_file_without_tex}
+  $cmd
+  $cmd
+  exit 0
 fi
 
 if [ "$1" = "format" ]; then
