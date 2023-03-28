@@ -23,6 +23,12 @@ RUN <<HEREDOC
   apt install -y git texlive-fonts-recommended texlive-fonts-extra
 HEREDOC
 
+ENV TEXLIVE_VERSION=2022
+RUN <<HEREDOC
+  set -e
+  tlmgr option repository http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/${TEXLIVE_VERSION}/tlnet-final
+HEREDOC
+
 # cache big packages
 RUN <<HEREDOC
     set -e
@@ -55,7 +61,6 @@ RUN <<HEREDOC
     rm -rf /usr/local/texlive/${TEXLIVE_VERSION}/tlpkg/texlive.tlpdb.main.*
 HEREDOC
 
-ENV TEXLIVE_VERSION=2022
 ENV PATH ${PATH}:\
 /usr/local/texlive/${TEXLIVE_VERSION}/bin/x86_64-linux:\
 /usr/local/texlive/${TEXLIVE_VERSION}/bin/aarch64-linux
