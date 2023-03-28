@@ -67,6 +67,18 @@ their new features to improve the usability, accessibility and maintainability o
 
 \subsubsection{Architecture}
 
+The application uses 5 components depicted in figure\ref{fig:ecamp3-architecture}.
+The frontend is a Vue application bundled with vite and served by a nginx web server.
+The api is a PHP application using the API Platform framework which also served by a web server.
+The print service is a nuxt application which lets the browserless container visit itself to render a printable
+html of an activity, schedule or a whole camp and convert it to a pdf, which is then served back to the frontend.
+
+\begin{figure}[h!]
+	\includegraphics[height=\columnwidth]{sections/assets/ecamp3-architecture}
+	\caption{eCamp V3 Architecture}
+	\label{fig:ecamp3-architecture}
+\end{figure}
+
 \subsubsection{Deployment}
 
 \section{Related work}
