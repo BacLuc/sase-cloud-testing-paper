@@ -163,7 +163,9 @@ jobs:
           cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
 
       - name: allow 1000 to write files
-        run: chmod -R +w .
+        run: |
+          sudo chown -R 1000 .
+          ls -lah
 
       - name: check-format
         run: docker compose run --rm latex check-format
@@ -195,10 +197,12 @@ jobs:
           cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
 
       - name: allow 1000 to write files
-        run: chmod -R +w .
+        run: |
+          sudo chown -R 1000 .
+          ls -lah
 
       - name: generate pdf
-        run: docker compose run -u 1001 --rm latex
+        run: docker compose run --rm latex
 
       - name: add archive to build output
         uses: actions/upload-artifact@v2
