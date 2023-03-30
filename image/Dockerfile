@@ -73,7 +73,7 @@ HEREDOC
 
 ENV LATEX_MAIN_FILE="main.tex"
 
-COPY --link entrypoint.sh /usr/local/bin/entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint
 RUN chmod +x /usr/local/bin/entrypoint
 
 USER $USERNAME
