@@ -46,9 +46,37 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \subsubsection{OCI containers and docker}
 
+The Open Container Initiative (OCI) is a project to create standards around containers\cite{oci-webiste}.
+Containers are a way to package (image spec), distribute (distribution spec) and run (runtime spec) an application
+which may consist of binaries or a script with its interpreter.
+The application can be shipped with all it's dependencies that the runtime does not need to adhere to any
+requirements except for the runtime spec.
+But a container is not a virtual machine with all its drawbacks, the kernel of a container is shared with the host system.
+Thus the image of a container can be smaller and running the container needs almost always less resources than running the same application
+in virtual machine.
+Docker Inc\. offers one implementation of the OCI specifications with a build tool for OCI images (buildkit), a runtime (containerd)
+and a cli (docker-cli) to interact with the build tool and the runtime\cite{docker-container-runtime-website}.
+
 \subsubsection{Kubernetes}
 
+Kubernetes is a tool developed and open sourced by Google to manage and orchestrate multiple containers.
+It allows to configure which containers should run, under which port which container is accessible,
+how the containers can interact with each other, under which conditions a container is considered healthy and it also allows
+to inject configuration files, environment variables and secrets into the container.
+With the configuration the user describes the state in which the cluster should be, and kubernetes then performs the
+operations like starting a container, configuring the network or injecting configuration to reach this state.
+If a container crashes and the cluster deviates from the configured state, kubernetes can automatically detect that
+the state deviated and then tries to restore the desired state by e.g.\ restarting a container.
+Kubernetes can also be used on multiple nodes, where one main node can deploy the containers to many child nodes
+and thus provide an easy way for horizontal scaling.
+
 \subsubsection{Helm}
+
+Helm is package manager for kubernetes\cite{artifacthub-io}.
+A collection of kubernetes configuration files can be packaged together and published as helm chart on a repository
+like artifacthub.io\cite{artifacthub-io}.
+Helm also offers the possibility to use templates for your kubernetes configuration files, that the helm chart
+can be adapted when it's deployed to a kubernetes cluster.
 
 \subsubsection{Github Actions}
 
