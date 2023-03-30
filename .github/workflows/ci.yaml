@@ -142,25 +142,10 @@ jobs:
       - build-info
       - build-image
     env:
-      build-config: ${{ toJSON(fromJSON(needs.build-info.outputs.build-config)[0]) }}
       VERSION: ${{ github.sha }}
       REPO_OWNER: ${{ needs.build-info.outputs.repo-owner }}
     steps:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Build and load image
-        uses: docker/build-push-action@v4
-        with:
-          load: true
-          file: ${{ fromJSON(env.build-config).dockerfile }}
-          tags: ${{ fromJSON(env.build-config).image }}:${{ env.VERSION }}
-          context: ${{ fromJSON(env.build-config).context }}
-          cache-from: type=gha,scope=${{ fromJSON(env.build-config).image }}
-          cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
 
       - name: allow 1000 to write files
         run: |
@@ -176,25 +161,10 @@ jobs:
       - build-info
       - build-image
     env:
-      build-config: ${{ toJSON(fromJSON(needs.build-info.outputs.build-config)[0]) }}
       VERSION: ${{ github.sha }}
       REPO_OWNER: ${{ needs.build-info.outputs.repo-owner }}
     steps:
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # tag=v3
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Build and load image
-        uses: docker/build-push-action@v4
-        with:
-          load: true
-          file: ${{ fromJSON(env.build-config).dockerfile }}
-          tags: ${{ fromJSON(env.build-config).image }}:${{ env.VERSION }}
-          context: ${{ fromJSON(env.build-config).context }}
-          cache-from: type=gha,scope=${{ fromJSON(env.build-config).image }}
-          cache-to: type=gha,scope=${{ fromJSON(env.build-config).image }},mode=max
 
       - name: allow 1000 to write files
         run: |
