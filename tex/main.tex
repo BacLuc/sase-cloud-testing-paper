@@ -8,6 +8,7 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{hyperref}
 
 %! suppress = DiscouragedUseOfDef
 \def\BibTeX{{%! suppress = PrimitiveStyle
@@ -79,6 +80,15 @@ Helm also offers the possibility to use templates for your kubernetes configurat
 can be adapted when it's deployed to a kubernetes cluster.
 
 \subsubsection{Github Actions}
+
+Github Actions is a CI/CD service offered by Github\cite{github-actions-website}.
+It allows to configure workflows with yaml which integrate well with the version control, review
+and issue tracking system of github itself.
+A workflow consists of trigger events like a git push to a branch, a pull request, a manual workflow dispatch or
+other triggers and jobs.
+In each job the different steps can be defined to build, test or deploy a service.
+An example for such a workflow can be found at the following link: \href{https://github.com/ecamp/ecamp3/blob/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7/.github/workflows/reusable-build-and-push.yml}{ecamp3/reusable-build-and-push.yml}.
+For each job a virtual machine is provisioned in which this job is executed\cite{github-actions-about-runner}.
 
 \section{eCamp Version 3}
 
