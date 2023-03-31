@@ -72,7 +72,7 @@ and thus provide an easy way for horizontal scaling.
 
 \subsubsection{Helm}
 
-Helm is package manager for kubernetes\cite{artifacthub-io}.
+Helm is package manager for kubernetes\cite{helm-website}.
 A collection of kubernetes configuration files can be packaged together and published as helm chart on a repository
 like artifacthub.io\cite{artifacthub-io}.
 Helm also offers the possibility to use templates for your kubernetes configuration files, that the helm chart
@@ -108,6 +108,13 @@ html of an activity, schedule or a whole camp and convert it to a pdf, which is 
 \end{figure}
 
 \subsubsection{Deployment}
+
+The application is currently deployed to a kubernetes cluster of DigitalOcean.
+As database a managed postgres instance is used which already includes scalability and backups for 5 days.
+To separate the stages 3 clusters for development, staging and production are in use.
+For all self developed services the respective applications are packaged with docker in an OCI image and then
+pushed to docker hub with github actions\cite{ecamp3-reusable-build-and-push}.
+Then these images are deployed with a helm chart to the respective kubernetes cluster\cite{ecamp3-reusable-dev-deployment, ecamp3-deployment-stage-prod}.
 
 \section{Related work}
 
