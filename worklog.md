@@ -219,4 +219,11 @@ Literature analysis of bugs, analysis of source code, test results, issues on gi
   Techniques & Tools
   - types of tests
     - Graphic in V Software Testing Techniques
-- 
+
+Find studies for:
+- Adoption of cloud testing services on software projects
+- Sizes of software projects
+
+Find paper for the test levels and test types.
+
+State of ecamp used: https://github.com/ecamp/ecamp3/tree/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7

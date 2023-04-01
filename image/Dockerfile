@@ -53,6 +53,7 @@ RUN <<HEREDOC
     packages="$packages cite"
     packages="$packages xcolor"
     packages="$packages csquotes"
+    packages="$packages booktabs"
 
     packages="$packages latexindent"
     tlmgr install $packages
