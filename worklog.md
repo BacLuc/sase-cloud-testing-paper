@@ -221,9 +221,9 @@ Literature analysis of bugs, analysis of source code, test results, issues on gi
     - Graphic in V Software Testing Techniques
 
 Find studies for:
-- Adoption of cloud testing services on software projects
-- Sizes of software projects
+- Adoption of cloud testing services on software projects -> no study found
+- Sizes of software projects -> no study found
 
-Find paper for the test levels and test types.
+Find paper for the test levels and test types. -> no conclusive study found
 
 State of ecamp used: https://github.com/ecamp/ecamp3/tree/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7
