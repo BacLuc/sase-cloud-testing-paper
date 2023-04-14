@@ -418,6 +418,24 @@ It uses a centralized configuration stored in a MySQL database instead of relyin
 that can be put under version control, which may impact the efficiency of managing and configuring tests for different branches.
 ElasTest has promising features such as log aggregation and integration with OWASP ZAP for security scanning
 The question of the benefits of applying a testing tool could not be answered.
+\newline
+One advantage of the entire test suite can be highlighted.
+The eCamp V3 repository can use automated dependency updates with the Mend Renovate\cite{renovate-website} tool since 2020/20/12\cite{ecamp3-activate-renovate}.
+Since 2022/20/06 renovate is even configured to merge without a pull request if the CI passes\cite{ecamp3-no-pr-renovate}.
+Before, renovate auto approved pull requests for patch and minor upgrades, but the developers had a window to stop the merge.
+In these 2 years this automated dependency updating only broke the main branch (in the eCamp V3 repository called devel) 2 times.
+The first time was in 2021 when symfony withdrew packages renovate already updated to\cite{renovate-first-break-of-devel}.
+The second time was the update of nuxt already mentioned (\href{https://github.com/ecamp/ecamp3/commit/55c728e5b543a920a97988882df2ea99136228ea}{fix(deps): update dependency nuxt to v2.16.0}),
+where the CI did not test for the regression that happened.
+The configuration of renovate requires a little maintenance, but the cost is bearable with 69 commits in 2 years
+(of which 13 are from renovate itself)\cite{renovate-json-history} compared to the benefit depicted in~\ref{fig:renovate-contributions}.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=\columnwidth]{sections/assets/renovate-contributions}
+	\caption{Top committers for eCamp V3}
+	\label{fig:renovate-contributions}
+\end{figure}
+\newline
 More data is needed on which bugs can be prevented by implementing test types at different levels in applications of varying sizes and complexities.
 Future work could involve performing similar analyses on different applications using different cloud testing tools to gather more data.
 With this data developers can then decide if they need to test for certain bugs, at which level they want to test
