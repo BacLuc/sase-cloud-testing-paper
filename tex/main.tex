@@ -58,7 +58,7 @@ Cloud services can be used for version control, review, build, testing, delivery
 These cloud testing techniques can not only be used for large-scale distributed systems, but they can also reduce the
 effort and costs for testing small to medium-sized applications.
 How these cloud testing techniques can be applied to a small to medium-sized application will be shown through the example
-of eCampV3, an open-source web application to plan camps for different organizations.
+of eCampV3, an open-source web application to plan camps for various organizations.
 The next paragraphs will be structured as follows:
 In the remaining part of the introduction, some technological terms will be introduced, and the eCampV3 application will be
 outlined.
@@ -85,16 +85,16 @@ and a CLI (docker-cli) to interact with the build tool and the runtime\cite{dock
 
 \subsubsection{Kubernetes}
 
-Kubernetes is a tool developed and open-sourced by Google to manage and orchestrate multiple containers.
+Kubernetes is a tool developed and open-sourced by Google to manage and orchestrate multiple containers\cite{kubernetes-docs}.
 It allows you to configure which containers should run, under which port a container is accessible,
 how the containers can interact with each other, under which conditions a container is considered healthy, and it also allows
-you to inject configuration files, environment variables, and secrets into the container.
+you to inject configuration files, environment variables, and secrets into the container\cite{kubernetes-docs}.
 With the configuration, the user describes the state in which the cluster should be, and Kubernetes then performs the
-operations like starting a container, configuring the network, or injecting configuration to reach this state.
+operations like starting a container, configuring the network, or injecting configuration to reach this state\cite{kubernetes-docs}.
 If a container crashes and the cluster deviates from the configured state, Kubernetes can automatically detect that
-the state has deviated and then tries to restore the desired state by, for example, restarting a container.
+the state has deviated and then tries to restore the desired state by, for example, restarting a container\cite{kubernetes-docs}.
 Kubernetes can also be used on multiple nodes, where one main node can deploy the containers to many child nodes,
-thus providing an easy way for horizontal scaling.
+thus providing an easy way for horizontal scaling\cite{kubernetes-docs}.
 
 \subsubsection{Helm}
 
@@ -128,11 +128,12 @@ and new features to enhance the usability, accessibility, and maintainability of
 
 \subsubsection{Architecture}
 
-The application uses 5 components depicted in Figure \ref{fig:ecamp3-architecture}.
+The application uses 5 components depicted in Figure\ref{fig:ecamp3-architecture}.
 The frontend is a Vue application bundled with Vite and served by an NGINX web server.
 The API is a PHP application using the API Platform framework, which is also served by a web server.
-The print service is a Nuxt application that allows the browserless container to visit itself to render
-a printable HTML of an activity, schedule, or a whole camp, and convert it to a PDF, which is then served back to the frontend.
+The print service is a Nuxt application that triggers the browserless container to fetch a printable HTML of a single activity
+or a whole camp from the print service, and then convert it to a PDF\@.
+The PDF is then served back to the frontend.
 
 \begin{figure}[h!]
 	\centering
@@ -190,7 +191,6 @@ Performance tests can simulate the load, even against a separate instance, and h
 before the application crashes in production.
 The authors described three tools: Apache JMeter, Load Focus, and Nouvola, and conducted tests against three popular online
 shopping applications in India - Flipkart, Snapdeal, and Amazon - using the Nouvola tool.
-For this project, only Apache JMeter was evaluated to limit the scope.
 
 With the literature review, we have now identified the tools depicted in Table~\ref{tab:test-tools-and-frameworks}
 for various test levels that can be used to test cloud applications.
@@ -213,8 +213,6 @@ for various test levels that can be used to test cloud applications.
 	\caption{Test tools and frameworks}
 	\label{tab:test-tools-and-frameworks}
 \end{table}
-
-\section{Background}
 
 \section{Method}
 The literature review showcases various cloud testing tools that can be utilized for testing at different levels and for different types of testing.
@@ -350,7 +348,7 @@ With the ability to leverage the cloud using GitHub Actions, achieving high cove
 If the elapsed time for end-to-end tests becomes too long, the tests can be divided into groups and run in parallel.
 Even a possible future regression can be detected by the current end-to-end tests should it happen again.
 This regression was introduced in the commit \href{https://github.com/ecamp/ecamp3/commit/55c728e5b543a920a97988882df2ea99136228ea}{fix(deps): update dependency nuxt to v2.16.0},
-which included a breaking change with Tailwind CSS.
+which included a breaking change with Tailwind CSS\@.
 However, this was fixed by the pull request \href{https://github.com/ecamp/ecamp3/pull/3275}{fix(print): fixes tailwind/nuxt + e2e tests for print},
 which addressed the issue and added tests to detect similar regressions in the future.
 
