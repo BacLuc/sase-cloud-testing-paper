@@ -86,9 +86,9 @@ and a CLI (docker-cli) to interact with the build tool and the runtime\cite{dock
 \subsubsection{Kubernetes}
 
 Kubernetes is a tool developed and open-sourced by Google to manage and orchestrate multiple containers\cite{kubernetes-docs}.
-It allows you to configure which containers should run, under which port a container is accessible,
+It allows to configure which containers should run, under which port a container is accessible,
 how the containers can interact with each other, under which conditions a container is considered healthy, and it also allows
-you to inject configuration files, environment variables, and secrets into the container\cite{kubernetes-docs}.
+to inject configuration files, environment variables, and secrets into the container\cite{kubernetes-docs}.
 With the configuration, the user describes the state in which the cluster should be, and Kubernetes then performs the
 operations like starting a container, configuring the network, or injecting configuration to reach this state\cite{kubernetes-docs}.
 If a container crashes and the cluster deviates from the configured state, Kubernetes can automatically detect that
@@ -101,13 +101,13 @@ thus providing an easy way for horizontal scaling\cite{kubernetes-docs}.
 Helm is a package manager for Kubernetes\cite{helm-website}.
 A collection of Kubernetes configuration files can be packaged together and published as a Helm chart on a repository
 like artifacthub.io\cite{artifacthub-io}.
-Helm also offers the possibility to use templates for your Kubernetes configuration files so that the Helm chart
+Helm also offers the possibility to use templates for the Kubernetes configuration files so that the Helm chart
 can be adapted when it's deployed to a Kubernetes cluster.
 
 \subsubsection{Github Actions}
 
 GitHub Actions is a CI/CD service offered by GitHub\cite{github-actions-website}.
-It allows you to configure workflows with YAML that integrate well with the version control, review,
+It allows to configure workflows with YAML that integrate well with the version control, review,
 and issue tracking system of GitHub itself.
 A workflow consists of trigger events like a git push to a branch, a pull request, a manual workflow dispatch, or
 other triggers and jobs.
@@ -336,12 +336,12 @@ The following setup is needed to run Cypress tests:
 	\item Cypress configuration: \href{https://github.com/ecamp/ecamp3/blob/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7/e2e/cypress.config.js}{cypress.config.js}
 	\item Tests: \href{https://github.com/ecamp/ecamp3/tree/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7/e2e/specs}{e2e/specs}
 \end{itemize}
-Cypress offers a GitHub action that allows you to run Cypress tests with minimal effort.
+Cypress offers a GitHub action that allows to run Cypress tests with minimal effort.
 However, because this cannot be used locally, the eCamp team has decided to switch back to running the Cypress tests in
 a container\cite{ecamp3-e2e-tests-in-container}.
 This is also an example of how testing in the cloud makes it relatively easy to run tests.
 Cypress does not offer abstractions for starting the services needed for end-to-end tests\cite{cypress-website-best-practice-web-servers},
-so the setup of your application has to be executed by yourself, which is as complex as the application to test: \href{https://github.com/ecamp/ecamp3/blob/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7/.github/workflows/continuous-integration.yml#L262,L350}{.github/workflows/continuous-integration.yml\#L262,L350}.
+so the setup of the application has to be executed by the developer, which is as complex as the application to test: \href{https://github.com/ecamp/ecamp3/blob/7a1cf92e3eee27b0b942fcd87bd8ce5c221089b7/.github/workflows/continuous-integration.yml#L262,L350}{.github/workflows/continuous-integration.yml\#L262,L350}.
 \newline
 Cypress can be used to perform functional and acceptance tests at the system level.
 With the ability to leverage the cloud using GitHub Actions, achieving high coverage of functional and acceptance tests is possible.
