@@ -222,9 +222,6 @@ For each tool, the following questions can now be answered:
 	\item RQ1: How can these tools be applied?
 	\item RQ2: Which test level and test type can be covered by this tool?
 \end{itemize}
-A third question would be: \enquote{Which bugs can be prevented by using this testing tool?}
-The underlying research does not clearly indicate which types of bugs were prevented by using the respective tool, and
-there is not enough data available about the development process and bugs in production of eCampV3 to answer this question.
 Table~\ref{tab:test-levels-and-tools} illustrates the different tools for which the experiment tries to describe
 how the tools can be applied to perform the different levels and types of tests.
 
@@ -416,8 +413,7 @@ However, for performance testing, the setup effort increases when testing with b
 ElasTest stands out compared to other tools in terms of setup effort and design choice.
 It uses a centralized configuration stored in a MySQL database instead of relying on a text representation (e.g., YAML, XML, scripts)
 that can be put under version control, which may impact the efficiency of managing and configuring tests for different branches.
-ElasTest has promising features such as log aggregation and integration with OWASP ZAP for security scanning
-The question of the benefits of applying a testing tool could not be answered.
+ElasTest has promising features such as log aggregation and integration with OWASP ZAP for security scanning.
 \newline
 One advantage of the entire test suite can be highlighted.
 The eCamp V3 repository can use automated dependency updates with the Mend Renovate\cite{renovate-website} tool since 2020/20/12\cite{ecamp3-activate-renovate}.
